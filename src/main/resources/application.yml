@@ -14,6 +14,14 @@ spring:
         id: account-service
         uri: lb://ACCOUNT-SERVICE
         predicates[0]: Path=/api/v1/account/**, /api/v1/account-movement/**
+      routes[2]:
+        id: credit-service
+        uri: lb://CREDIT-SERVICE
+        predicates[0]: Path=/api/v1/credit/**, /api/v1/credit-payment/**
+      routes[3]:
+        id: transaction-service
+        uri: lb://TRANSACTION-SERVICE
+        predicates[0]: Path=/api/v1/credit/**, /api/v1/credit-payment/**
 
     loadbalancer:
       ribbon:

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes[0]:
+        id: customer-service
+        uri: lb://CUSTOMER-SERVICE
+        predicates[0]: Path=/api/v1/customer/**
+      routes[1]:
+        id: account-service
+        uri: lb://ACCOUNT-SERVICE
+        predicates[0]: Path=/api/v1/account/**, /api/v1/account-movement/**
+
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
